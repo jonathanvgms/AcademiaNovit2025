@@ -4,13 +4,10 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure SQLite and DbContext
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=Data.db"));
 
-// Add Scalar.AspNetCore
 builder.Services.AddOpenApi();
 
-// Build the app
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -19,7 +16,6 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
-// Map endpoints
 app.MapGet("/products", async (AppDbContext db) =>
     await db.Products.ToListAsync());
 
@@ -58,5 +54,4 @@ app.MapDelete("/products/{id}", async (int id, AppDbContext db) =>
     return Results.NoContent();
 });
 
-// Run the app
 app.Run();
