@@ -1,0 +1,30 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: GH-docker-registry-DEV
+
+on:
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    - name: Build image
+      run: docker build -t neomart_api .
+    - name: Log in registry
+      run: docker login ghcr.io -u ${{secrets.REGISTRY_USERNAME}} -p ${{secrets.REGISTRY_TOKEN}}
+    - name: Tag image
+      run: docker -t neomart_api:latest neomart_api
+    - name: Upload image to registry
+      run: docker push neomart_api:latest
