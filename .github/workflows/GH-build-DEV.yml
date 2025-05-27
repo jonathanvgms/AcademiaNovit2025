@@ -26,3 +26,23 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v5
+      with:        
+        # Required mail server address if not connection_url:
+        server_address: ${{secrets.EMAIL_HOST}}
+        # Server port, default 25:
+        server_port: ${{secrets.EMAIL_PORT}}
+        # Optional (recommended) mail server username:
+        username: ${{secrets.EMAIL_USERNAME}}
+        # Optional (recommended) mail server password:
+        password: ${{secrets.EMAIL_PASSWORD}}
+        # Required mail subject:
+        subject: Github Actions job result
+        # Required recipients' addresses:
+        to: jonathan.velazquez@novit.com.ar
+        # Required sender full name (address can be skipped):
+        from: Github Actions # <user@example.com>
+        # Optional plain body:
+        body: Build job of ${{github.repository}} completed successfully!        
+        
