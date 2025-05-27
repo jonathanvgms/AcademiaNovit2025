@@ -4,7 +4,7 @@
 
 Antes de ejecutar el proyecto, asegúrate de cumplir con los siguientes requisitos:
 
-1. **.NET SDK**: Instala la versión 8.0 o superior del SDK de .NET. Puedes descargarlo desde [dotnet.microsoft.com](https://dotnet.microsoft.com/).
+1. **.NET SDK**: Instala la versión 9.0 o superior del SDK de .NET. Puedes descargarlo desde [dotnet.microsoft.com](https://dotnet.microsoft.com/).
 2. **SQLite**: El proyecto utiliza SQLite como base de datos. No se requiere configuración adicional, ya que el archivo `Data.db` se genera automáticamente.
 3. **Visual Studio (opcional)**: Si prefieres usar un entorno gráfico, instala Visual Studio 2022 o superior con la carga de trabajo de desarrollo web y de escritorio .NET.
 
