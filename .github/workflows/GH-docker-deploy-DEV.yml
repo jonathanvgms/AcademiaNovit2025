@@ -21,6 +21,10 @@ jobs:
       run: docker build -t neomart_api .
     - name: Log in registry
       run: docker login ghcr.io -u ${{secrets.REGISTRY_USERNAME}} -p ${{secrets.REGISTRY_TOKEN}}
+    - name: Re-tag prod
+      run: docker image tab ghcr.io/${{secrets.REGISTRY_USERNAME}}/neomart_api:latest ghcr.io/${{secrets.REGISTRY_USERNAME}}/neomart_api:production 
+    - name: Upload production image to registry
+      run: docker push ghcr.io/${{secrets.REGISTRY_USERNAME}}/neomart_api:production
     - name: Build image
       run: docker build -t ghcr.io/${{secrets.REGISTRY_USERNAME}}/neomart_api:latest .    
     - name: Upload image to registry
