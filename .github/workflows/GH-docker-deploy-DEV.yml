@@ -1,0 +1,35 @@
+name: GH-docker-deploy-DEV
+
+on:
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    - name: Build image
+      run: docker build -t neomart_api .
+    - name: Log in registry
+      run: docker login ghcr.io -u ${{secrets.REGISTRY_USERNAME}} -p ${{secrets.REGISTRY_TOKEN}}
+    - name: Build image
+      run: docker build -t ghcr.io/${{secrets.REGISTRY_USERNAME}}/neomart_api:latest .    
+    - name: Upload image to registry
+      run: docker push ghcr.io/${{secrets.REGISTRY_USERNAME}}/neomart_api:latest
+    - name: Run docker-compose to PROD
+    - uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.PROD_HOST }}
+        username: ${{ secrets.PROD_USERNAME }}
+        password: ${{ secrets.PROD_KEY }}
+        port: ${{ secrets.PROD_PORT }}
+        script: docker-compose up -d
