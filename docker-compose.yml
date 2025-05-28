@@ -1,13 +1,12 @@
-version: "3.9"
 services:
   neomart_api:
-    image: ghcr.io/${{secrets.REGISTRY_USERNAME}}/neomart_api:latest
+    image: ghcr.io/jonathanvgms/neomart_api:latest
     container_name: neomart_api
     pull_policy: always
     ports:
       - "5000:8080"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=db;Database=Neomart;User Id=sa;Password=yourStrong(!)Password;
+    # environment:
+    #  - ASPNETCORE_ENVIRONMENT=Development
+    #  - ASPNETCORE_URLS=http://+:80
+    #  - ConnectionStrings__DefaultConnection=Server=db;Database=Neomart;User Id=sa;Password=yourStrong(!)Password;
     
