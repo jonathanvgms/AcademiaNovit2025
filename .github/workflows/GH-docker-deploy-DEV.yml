@@ -32,4 +32,4 @@ jobs:
         username: ${{ secrets.PROD_USERNAME }}
         key: ${{ secrets.PROD_KEY }}
         port: ${{ secrets.PROD_PORT }}
-        script: docker-compose up -d
+        script: docker compose up -d
