@@ -1,0 +1,17 @@
+services:
+  neomart_api:
+    image: ghcr.io/jonathanvgms/neomart_api:latest
+    deploy:
+      replicas: 5
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "5000:8080"
+
+networks:
+  neomart_network:
+    driver: overlay
+
