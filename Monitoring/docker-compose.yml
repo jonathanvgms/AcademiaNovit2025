@@ -48,15 +48,15 @@ services:
       restart_policy:
         condition: always
 
-  app:
-    image: your-app-image:latest
-    container_name: app
-    ports:
-      - "5000:5000"
-    deploy:
-      replicas: 5
-      restart_policy:
-        condition: always
+  # app:
+  #   image: your-app-image:latest
+  #   container_name: app
+  #   ports:
+  #     - "5000:5000"
+  #   deploy:
+  #     replicas: 5
+  #     restart_policy:
+  #       condition: always
 
 volumes:
   grafana_data:
