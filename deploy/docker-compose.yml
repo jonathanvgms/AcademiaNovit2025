@@ -1,0 +1,8 @@
+services:
+  neomart_api:
+    image: ghcr.io/jonathanvgms/neomart_api:latest
+    container_name: neomart_api
+    pull_policy: always
+    ports:
+      - "5000:8080"
+    
