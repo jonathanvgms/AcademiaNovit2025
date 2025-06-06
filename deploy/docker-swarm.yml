@@ -10,8 +10,3 @@ services:
         condition: on-failure
     ports:
       - "5000:8080"
-
-networks:
-  neomart_network:
-    driver: overlay
-

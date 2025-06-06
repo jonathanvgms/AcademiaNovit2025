@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   node_exporter:
     image: prom/node-exporter:latest
@@ -48,15 +47,17 @@ services:
       restart_policy:
         condition: always
 
-  # app:
-  #   image: your-app-image:latest
-  #   container_name: app
-  #   ports:
-  #     - "5000:5000"
-  #   deploy:
-  #     replicas: 5
-  #     restart_policy:
-  #       condition: always
+  neomart_api:
+    image: ghcr.io/jonathanvgms/neomart_api:latest
+    deploy:
+      replicas: 5
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "5000:8080"
 
 volumes:
   grafana_data:
